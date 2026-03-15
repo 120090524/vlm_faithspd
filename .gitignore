@@ -11,6 +11,11 @@ data/raw/
 
 
 outputs/
+!outputs/baseline/
+!outputs/consistency/
+!outputs/faithfulness/
+!outputs/metrics/
+!outputs/remove_debug/
 work/
 
 
