@@ -224,6 +224,38 @@ python mechanism_analysis/demo.py \
 - CUDA >= 11.8
 - GPU Memory >= 24GB (recommended)
 
+## 补充本地复现新增脚本说明
+
+下面这部分是基于本地复现流程新增的 `scripts/` 目录说明，主要用于 **Qwen2.5-VL-7B**、benchmark 导出、baseline 生成、analysis 适配和反事实图像构造。它们属于**本地复现辅助脚本**，不是原始仓库官方发布内容。
+
+- `export_spd_dataset.py`：从 Hugging Face 导出 SPD-Faith-Bench 到本地目录（如 `work/spd_local/`），同时保存图片、`metadata.json` 和 `jsonl` 清单。
+- `check_qwen25vl.py`：最小连通性测试脚本，用来确认 Qwen2.5-VL-7B 可以正常加载，并且能读取双图输入完成简单问答。
+- `run_baseline_qwen25vl.py`：运行 Qwen2.5-VL-7B baseline，生成三类输出：`multi_diff`、`consistency`、`faithfulness`，供后续评测使用。
+- `build_analysis_jsonl.py`：把 baseline 输出和 metrics 整理成 analysis 所需的 `jsonl`，并基于 soft rule 给样本打上 `faithful / unfaithful` 标签。
+- `patch_analysis_for_qwen25.py`：复制并修补官方 analysis 脚本，使其兼容 Qwen2.5-VL-7B（例如替换模型类名和默认模型路径）。
+- `layer_analysis_generation_qwen25.py`：Qwen2.5 版本的 generation attention 分析脚本，用来观察生成阶段对 `system / visual / user` 三类 token 的注意力变化。
+- `analyze_layer_changes_qwen25.py`：Qwen2.5 版本的层变化分析脚本，用来比较 MHA / FFN 的表示变化、cosine 和 KL divergence。
+- `neuron_activation_qwen25.py`：Qwen2.5 版本的神经元激活分析脚本，用来比较 faithful / unfaithful 两组样本在 FFN 中间层的激活差异。
+- `run_tam_one_sample.py`：单样本 TAM 可视化脚本，用来对某个 faithful 或 unfaithful 样本生成 token-level 热图。
+- `reproduce_object_removal.py`：用于复现论文中的“物体消失”反事实图像构造流程，支持 `planner` 和 `fallback_only` 两种模式。
+
+### 建议使用顺序
+
+1. 先运行 `export_spd_dataset.py` 导出数据。  
+2. 再运行 `check_qwen25vl.py` 确认模型加载和双图输入正常。  
+3. 使用 `run_baseline_qwen25vl.py` 生成 baseline 输出。  
+4. 跑官方 `eval/` 脚本得到 metrics。  
+5. 用 `build_analysis_jsonl.py` 生成 faithful / unfaithful 分组文件。  
+6. 用 `patch_analysis_for_qwen25.py` 和 `*_qwen25.py` 脚本完成 generation attention、layer changes、neuron activation 等分析。  
+7. 如需可视化单样本证据区域，可运行 `run_tam_one_sample.py`。  
+8. 如需复现 benchmark 构造中的反事实图像编辑，可运行 `reproduce_object_removal.py`。  
+
+
+## Acknowledgements
+
+We thank the authors of the TAM (Token Activation Map) paper for their inspiring work and for providing ideas that motivated parts of our mechanism analysis. We are grateful for their contributions to interpretability research in vision-language models.  
+Project page: https://github.com/xmed-lab/TAM
+
 ## Acknowledgements
 
 We thank the authors of the TAM (Token Activation Map) paper for their inspiring work and for providing ideas that motivated parts of our mechanism analysis. We are grateful for their contributions to interpretability research in vision-language models.  
