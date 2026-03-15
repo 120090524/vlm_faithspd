@@ -1,0 +1,20 @@
+{
+  "image_id": 139,
+  "file_name": "000000000139.jpg",
+  "num_annotations": 20,
+  "difference": {
+    "type": "remove",
+    "bbox": [
+      236.98,
+      142.51,
+      24.7,
+      69.5
+    ],
+    "category": "potted plant",
+    "category_id": 64,
+    "area": 531.8071000000001,
+    "selection_reason": "The potted plant is a moderately sized (0.20% of image area, close to median), non-salient foreground object. Its removal is physically plausible and would not disrupt the scene's integrity.",
+    "object_index": 0
+  },
+  "mode": "planner_plus_inpaint"
+}

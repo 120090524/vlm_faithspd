@@ -1,0 +1,50 @@
+{
+  "summary": {
+    "total_samples": 0,
+    "avg_num_recall": 0,
+    "type_level": {
+      "color": {
+        "total_gt": 0,
+        "total_pred": 0,
+        "total_matched": 0,
+        "precision": null,
+        "recall": null,
+        "f1": 0.0
+      },
+      "remove": {
+        "total_gt": 0,
+        "total_pred": 0,
+        "total_matched": 0,
+        "precision": null,
+        "recall": null,
+        "f1": 0.0
+      },
+      "position": {
+        "total_gt": 0,
+        "total_pred": 0,
+        "total_matched": 0,
+        "precision": null,
+        "recall": null,
+        "f1": 0.0
+      },
+      "overall": {
+        "total_gt": 0,
+        "total_pred": 0,
+        "total_matched": 0,
+        "precision": null,
+        "recall": null,
+        "f1": 0.0
+      }
+    },
+    "category_level": {
+      "total_gt": 0,
+      "total_pred": 0,
+      "total_matched": 0,
+      "precision": null,
+      "recall": null,
+      "f1": 0.0
+    },
+    "model": "Qwen2.5-VL-7B-Instruct"
+  },
+  "per_sample_results": []
+}

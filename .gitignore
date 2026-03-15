@@ -10,7 +10,7 @@ __pycache__/
 data/raw/
 
 
-outputs/
+outputs/*
 !outputs/baseline/
 !outputs/consistency/
 !outputs/faithfulness/

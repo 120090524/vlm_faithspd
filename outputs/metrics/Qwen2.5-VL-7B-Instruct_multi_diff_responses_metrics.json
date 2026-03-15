@@ -1,0 +1,451 @@
+{
+  "summary": {
+    "total_samples": 10,
+    "avg_num_recall": 0.42833333333333334,
+    "type_level": {
+      "color": {
+        "total_gt": 16,
+        "total_pred": 9,
+        "total_matched": 9,
+        "precision": 1.0,
+        "recall": 0.5625,
+        "f1": 0.72
+      },
+      "remove": {
+        "total_gt": 24,
+        "total_pred": 7,
+        "total_matched": 7,
+        "precision": 1.0,
+        "recall": 0.2916666666666667,
+        "f1": 0.45161290322580644
+      },
+      "position": {
+        "total_gt": 1,
+        "total_pred": 1,
+        "total_matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "overall": {
+        "total_gt": 41,
+        "total_pred": 17,
+        "total_matched": 16,
+        "precision": 0.9411764705882353,
+        "recall": 0.3902439024390244,
+        "f1": 0.5517241379310345
+      }
+    },
+    "category_level": {
+      "total_gt": 41,
+      "total_pred": 17,
+      "total_matched": 8,
+      "precision": 0.47058823529411764,
+      "recall": 0.1951219512195122,
+      "f1": 0.27586206896551724
+    },
+    "model": "Qwen2.5-VL-7B-Instruct"
+  },
+  "per_sample_results": [
+    {
+      "gt_num": 3,
+      "pred_num": 2,
+      "num_recall": 0.6666666666666666,
+      "type_level": {
+        "color": {
+          "gt_count": 1,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "remove": {
+          "gt_count": 1,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "position": {
+          "gt_count": 1,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        }
+      },
+      "category_level": {
+        "gt_count": 3,
+        "pred_count": 2,
+        "matched": 1,
+        "precision": 0.5,
+        "recall": 0.3333333333333333,
+        "f1": 0.4
+      },
+      "sample_id": "15517"
+    },
+    {
+      "gt_num": 5,
+      "pred_num": 2,
+      "num_recall": 0.4,
+      "type_level": {
+        "color": {
+          "gt_count": 2,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6666666666666666
+        },
+        "remove": {
+          "gt_count": 3,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        },
+        "position": {
+          "gt_count": 0,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "category_level": {
+        "gt_count": 5,
+        "pred_count": 2,
+        "matched": 2,
+        "precision": 1.0,
+        "recall": 0.4,
+        "f1": 0.5714285714285715
+      },
+      "sample_id": "529148"
+    },
+    {
+      "gt_num": 4,
+      "pred_num": 2,
+      "num_recall": 0.5,
+      "type_level": {
+        "color": {
+          "gt_count": 1,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "remove": {
+          "gt_count": 3,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        },
+        "position": {
+          "gt_count": 0,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "category_level": {
+        "gt_count": 4,
+        "pred_count": 2,
+        "matched": 2,
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666
+      },
+      "sample_id": "161609"
+    },
+    {
+      "gt_num": 3,
+      "pred_num": 1,
+      "num_recall": 0.3333333333333333,
+      "type_level": {
+        "color": {
+          "gt_count": 0,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": null,
+          "f1": 0.0
+        },
+        "remove": {
+          "gt_count": 3,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        },
+        "position": {
+          "gt_count": 0,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "category_level": {
+        "gt_count": 3,
+        "pred_count": 1,
+        "matched": 1,
+        "precision": 1.0,
+        "recall": 0.3333333333333333,
+        "f1": 0.5
+      },
+      "sample_id": "22705"
+    },
+    {
+      "gt_num": 5,
+      "pred_num": 1,
+      "num_recall": 0.2,
+      "type_level": {
+        "color": {
+          "gt_count": 2,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6666666666666666
+        },
+        "remove": {
+          "gt_count": 3,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "position": {
+          "gt_count": 0,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "category_level": {
+        "gt_count": 5,
+        "pred_count": 1,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "sample_id": "572678"
+    },
+    {
+      "gt_num": 5,
+      "pred_num": 2,
+      "num_recall": 0.4,
+      "type_level": {
+        "color": {
+          "gt_count": 2,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 0.5,
+          "f1": 0.6666666666666666
+        },
+        "remove": {
+          "gt_count": 3,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        },
+        "position": {
+          "gt_count": 0,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "category_level": {
+        "gt_count": 5,
+        "pred_count": 2,
+        "matched": 1,
+        "precision": 0.5,
+        "recall": 0.2,
+        "f1": 0.28571428571428575
+      },
+      "sample_id": "394206"
+    },
+    {
+      "gt_num": 5,
+      "pred_num": 1,
+      "num_recall": 0.2,
+      "type_level": {
+        "color": {
+          "gt_count": 3,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        },
+        "remove": {
+          "gt_count": 2,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "position": {
+          "gt_count": 0,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "category_level": {
+        "gt_count": 5,
+        "pred_count": 1,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "sample_id": "492110"
+    },
+    {
+      "gt_num": 4,
+      "pred_num": 2,
+      "num_recall": 0.5,
+      "type_level": {
+        "color": {
+          "gt_count": 1,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "remove": {
+          "gt_count": 3,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        },
+        "position": {
+          "gt_count": 0,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "category_level": {
+        "gt_count": 4,
+        "pred_count": 2,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "sample_id": "203864"
+    },
+    {
+      "gt_num": 4,
+      "pred_num": 3,
+      "num_recall": 0.75,
+      "type_level": {
+        "color": {
+          "gt_count": 3,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 0.3333333333333333,
+          "f1": 0.5
+        },
+        "remove": {
+          "gt_count": 1,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "position": {
+          "gt_count": 0,
+          "pred_count": 1,
+          "matched": 0,
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "category_level": {
+        "gt_count": 4,
+        "pred_count": 3,
+        "matched": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "sample_id": "197388"
+    },
+    {
+      "gt_num": 3,
+      "pred_num": 1,
+      "num_recall": 0.3333333333333333,
+      "type_level": {
+        "color": {
+          "gt_count": 1,
+          "pred_count": 1,
+          "matched": 1,
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0
+        },
+        "remove": {
+          "gt_count": 2,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0
+        },
+        "position": {
+          "gt_count": 0,
+          "pred_count": 0,
+          "matched": 0,
+          "precision": null,
+          "recall": null,
+          "f1": 0.0
+        }
+      },
+      "category_level": {
+        "gt_count": 3,
+        "pred_count": 1,
+        "matched": 1,
+        "precision": 1.0,
+        "recall": 0.3333333333333333,
+        "f1": 0.5
+      },
+      "sample_id": "19786"
+    }
+  ]
+}

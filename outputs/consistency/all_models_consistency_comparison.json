@@ -1,0 +1,20 @@
+{
+  "Qwen2.5-VL-7B-Instruct": {
+    "avg_consistency_rate": 0.5650000000000001,
+    "total_samples": 10,
+    "valid_samples": 10,
+    "claim_statistics": {
+      "total_consistent_claims": 25,
+      "total_contradictory_claims": 16,
+      "total_ambiguous_claims": 0,
+      "avg_consistent_per_sample": 2.5,
+      "avg_contradictory_per_sample": 1.6
+    },
+    "score_distribution": {
+      "perfect_0.95_1.0": 0,
+      "high_0.8_0.95": 6,
+      "medium_0.5_0.8": 1,
+      "low_below_0.5": 3
+    }
+  }
+}

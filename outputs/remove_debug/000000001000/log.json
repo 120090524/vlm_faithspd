@@ -1,0 +1,20 @@
+{
+  "image_id": 1000,
+  "file_name": "000000001000.jpg",
+  "num_annotations": 17,
+  "difference": {
+    "type": "remove",
+    "bbox": [
+      52.14,
+      185.12,
+      59.26,
+      212.53
+    ],
+    "category": "person",
+    "category_id": 1,
+    "area": 6349.545300000001,
+    "selection_reason": "This person (a child) is of median size (2.07% of image area) and located at the edge of the group, making their removal plausible without disrupting the core scene composition or violating physical integrity.",
+    "object_index": 15
+  },
+  "mode": "planner_plus_inpaint"
+}

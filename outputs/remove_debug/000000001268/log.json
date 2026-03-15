@@ -1,0 +1,20 @@
+{
+  "image_id": 1268,
+  "file_name": "000000001268.jpg",
+  "num_annotations": 11,
+  "difference": {
+    "type": "remove",
+    "bbox": [
+      124.77,
+      124.71,
+      139.54,
+      17.07
+    ],
+    "category": "boat",
+    "category_id": 9,
+    "area": 1711.8113999999998,
+    "selection_reason": "The boat (ID1) is a moderately sized foreground object (exactly at the median area of 0.63%), non-salient, and its removal is physically plausible without violating scene integrity.",
+    "object_index": 1
+  },
+  "mode": "planner_plus_inpaint"
+}

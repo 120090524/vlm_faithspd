@@ -1,0 +1,911 @@
+{
+  "model": "Qwen2.5-VL-7B-Instruct",
+  "total_samples": 10,
+  "evaluation_method": "gpt4o_mini_consistency_check",
+  "summary_statistics": {
+    "avg_consistency_rate": 0.5650000000000001,
+    "total_samples": 10,
+    "valid_samples": 10,
+    "claim_statistics": {
+      "total_consistent_claims": 25,
+      "total_contradictory_claims": 16,
+      "total_ambiguous_claims": 0,
+      "avg_consistent_per_sample": 2.5,
+      "avg_contradictory_per_sample": 1.6
+    },
+    "score_distribution": {
+      "perfect_0.95_1.0": 0,
+      "high_0.8_0.95": 6,
+      "medium_0.5_0.8": 1,
+      "low_below_0.5": 3
+    }
+  },
+  "detailed_results": [
+    {
+      "sample_id": "15517",
+      "ground_truth": {
+        "num_differences": 3,
+        "modifications": [
+          {
+            "bbox_h": 84.49,
+            "bbox_w": 185.64,
+            "bbox_x": 162.58,
+            "bbox_y": 322.33,
+            "category": "bus",
+            "description": "\"There are three differences between the images. First, the green bus in the foreground has changed to blue. Second, one of the buses near the center of the bus terminal has been removed. Third, a bus in the middle of the terminal has shifted slightly to the right.\"",
+            "type": "color"
+          },
+          {
+            "bbox_h": 22.56,
+            "bbox_w": 90.98,
+            "bbox_x": 145.82,
+            "bbox_y": 274.98,
+            "category": "bus",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 29.36,
+            "bbox_w": 82.66,
+            "bbox_x": 433.22,
+            "bbox_y": 283.28,
+            "category": "bus",
+            "description": "",
+            "type": "position"
+          }
+        ]
+      },
+      "response_same": "No.",
+      "response_different": "No.",
+      "consistency_evaluation": {
+        "overall_consistency_rate": 0.0,
+        "total_claims": 3,
+        "consistent_claims": 0,
+        "contradictory_claims": 3,
+        "ambiguous_claims": 0,
+        "claim_analysis": [
+          {
+            "claim_id": 1,
+            "claim_text_A": "There is a bus with a different color",
+            "claim_text_B": "There is no color difference in the buses",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 2,
+            "claim_text_A": "A bus is removed from the scene",
+            "claim_text_B": "No buses are removed",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 3,
+            "claim_text_A": "The position of a bus has changed",
+            "claim_text_B": "No position changes in the buses",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          }
+        ],
+        "summary": {
+          "is_logically_consistent": false,
+          "primary_issue": "All claims contradict each other"
+        }
+      }
+    },
+    {
+      "sample_id": "529148",
+      "ground_truth": {
+        "num_differences": 5,
+        "modifications": [
+          {
+            "bbox_h": 42.31,
+            "bbox_w": 62.5,
+            "bbox_x": 252.91,
+            "bbox_y": 329.6,
+            "category": "mouse",
+            "description": "\"There are five differences between the images. First, the computer mouse on the left has changed color from gray to cyan. Second and third, two books from the shelf in the background have been removed. Fourth, the laptop on the right side of the desk has been removed entirely. Fifth, the laptop in the center has changed color from its original silver to purple.\"",
+            "type": "color"
+          },
+          {
+            "bbox_h": 22.69,
+            "bbox_w": 35.72,
+            "bbox_x": 270.51,
+            "bbox_y": 116.9,
+            "category": "book",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 41.52,
+            "bbox_w": 49.93,
+            "bbox_x": 256.99,
+            "bbox_y": 154.64,
+            "category": "book",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 174.32,
+            "bbox_w": 174.29,
+            "bbox_x": 376.04,
+            "bbox_y": 53.61,
+            "category": "laptop",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 200.08,
+            "bbox_w": 206.78,
+            "bbox_x": 294.85,
+            "bbox_y": 220.18,
+            "category": "laptop",
+            "description": "",
+            "type": "color"
+          }
+        ]
+      },
+      "response_same": "No.",
+      "response_different": "Yes.",
+      "consistency_evaluation": {
+        "overall_consistency_rate": 0.83,
+        "total_claims": 5,
+        "consistent_claims": 4,
+        "contradictory_claims": 1,
+        "ambiguous_claims": 0,
+        "claim_analysis": [
+          {
+            "claim_id": 1,
+            "claim_text_A": "Type: color, Object: mouse, Color: unknown",
+            "claim_text_B": "Type: color, Object: mouse, Color: unknown",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 2,
+            "claim_text_A": "Type: remove, Object: book",
+            "claim_text_B": "Type: remove, Object: book",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 3,
+            "claim_text_A": "Type: remove, Object: book",
+            "claim_text_B": "Type: remove, Object: book",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 4,
+            "claim_text_A": "Type: remove, Object: laptop",
+            "claim_text_B": "Type: remove, Object: laptop",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 5,
+            "claim_text_A": "Type: color, Object: laptop, Color: unknown",
+            "claim_text_B": "No mention of laptop color change",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          }
+        ],
+        "summary": {
+          "is_logically_consistent": false,
+          "primary_issue": "Contradictory claim regarding laptop color"
+        }
+      }
+    },
+    {
+      "sample_id": "161609",
+      "ground_truth": {
+        "num_differences": 4,
+        "modifications": [
+          {
+            "bbox_h": 78.23,
+            "bbox_w": 130.38,
+            "bbox_x": 245.31,
+            "bbox_y": 270.15,
+            "category": "dog",
+            "description": "There are four differences between the images. First, the dog inside the backpack has been removed entirely. Second, the backpack's color has changed from gray to lime green. Third, one person ascending the stairs on the left side has been removed. Fourth, another person ascending the stairs farther up has also been removed.",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 271.82,
+            "bbox_w": 362.43,
+            "bbox_x": 72.27,
+            "bbox_y": 201.71,
+            "category": "backpack",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 152.26,
+            "bbox_w": 60.03,
+            "bbox_x": 109.43,
+            "bbox_y": 188.55,
+            "category": "person",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 134.74,
+            "bbox_w": 49.35,
+            "bbox_x": 158.32,
+            "bbox_y": 211.55,
+            "category": "person",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "response_same": "No.",
+      "response_different": "Yes.",
+      "consistency_evaluation": {
+        "overall_consistency_rate": 0.67,
+        "total_claims": 4,
+        "consistent_claims": 3,
+        "contradictory_claims": 1,
+        "ambiguous_claims": 0,
+        "claim_analysis": [
+          {
+            "claim_id": 1,
+            "claim_text_A": "The dog is present in the first image.",
+            "claim_text_B": "The dog is not present in the second image.",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 2,
+            "claim_text_A": "The backpack is the same color in both images.",
+            "claim_text_B": "The backpack color is different in the two images.",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 3,
+            "claim_text_A": "The person is present in the first image.",
+            "claim_text_B": "The person is not present in the second image.",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 4,
+            "claim_text_A": "The second image has a different object in the backpack.",
+            "claim_text_B": "The second image has the same object in the backpack.",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          }
+        ],
+        "summary": {
+          "is_logically_consistent": false,
+          "primary_issue": "Contradictory claims about the presence and color of objects"
+        }
+      }
+    },
+    {
+      "sample_id": "22705",
+      "ground_truth": {
+        "num_differences": 3,
+        "modifications": [
+          {
+            "bbox_h": 65.6,
+            "bbox_w": 24.1,
+            "bbox_x": 81.67,
+            "bbox_y": 212.76,
+            "category": "bottle",
+            "description": "\"There are three differences between the images. First, the bottle on the counter to the left of the refrigerator has been removed. Second, the wine glass next to the bottle has disappeared. Third, the bowl on the counter near the backsplash has been removed.\"",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 82.36,
+            "bbox_w": 25.14,
+            "bbox_x": 179.41,
+            "bbox_y": 210.82,
+            "category": "wine glass",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 23.95,
+            "bbox_w": 31.58,
+            "bbox_x": 23.29,
+            "bbox_y": 256.96,
+            "category": "bowl",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "response_same": "Yes.",
+      "response_different": "No.",
+      "consistency_evaluation": {
+        "overall_consistency_rate": 0.0,
+        "total_claims": 3,
+        "consistent_claims": 0,
+        "contradictory_claims": 3,
+        "ambiguous_claims": 0,
+        "claim_analysis": [
+          {
+            "claim_id": 1,
+            "claim_text_A": "The bottle is present",
+            "claim_text_B": "The bottle is not present",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 2,
+            "claim_text_A": "The wine glass is present",
+            "claim_text_B": "The wine glass is not present",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 3,
+            "claim_text_A": "The bowl is present",
+            "claim_text_B": "The bowl is not present",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          }
+        ],
+        "summary": {
+          "is_logically_consistent": false,
+          "primary_issue": "Inconsistent presence of objects"
+        }
+      }
+    },
+    {
+      "sample_id": "572678",
+      "ground_truth": {
+        "num_differences": 5,
+        "modifications": [
+          {
+            "bbox_h": 75.44,
+            "bbox_w": 145.16,
+            "bbox_x": 182.42,
+            "bbox_y": 344.78,
+            "category": "chair",
+            "description": "There are five differences between the images. First, the chair on the right side of the dining table has changed color from its original shade to blue. Second, the chair on the left side of the living room has changed color from its original shade to magenta. Third, the potted plant near the balcony has been removed. Fourth, the wine glass on the bar table has disappeared. Lastly, the cup on the dining table has been removed.",
+            "type": "color"
+          },
+          {
+            "bbox_h": 98.31,
+            "bbox_w": 122.45,
+            "bbox_x": 162.06,
+            "bbox_y": 229.58,
+            "category": "chair",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 148.62,
+            "bbox_w": 81.32,
+            "bbox_x": 395.18,
+            "bbox_y": 158.26,
+            "category": "potted plant",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 86.3,
+            "bbox_w": 40.9,
+            "bbox_x": 394.58,
+            "bbox_y": 279.66,
+            "category": "wine glass",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 21.99,
+            "bbox_w": 20.25,
+            "bbox_x": 20.64,
+            "bbox_y": 191.63,
+            "category": "cup",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "response_same": "No.",
+      "response_different": "No.",
+      "consistency_evaluation": {
+        "overall_consistency_rate": 0.83,
+        "total_claims": 5,
+        "consistent_claims": 4,
+        "contradictory_claims": 1,
+        "ambiguous_claims": 0,
+        "claim_analysis": [
+          {
+            "claim_id": 1,
+            "claim_text_A": "Type: color, Object: chair, Color: unknown",
+            "claim_text_B": "Type: color, Object: chair, Color: unknown",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 2,
+            "claim_text_A": "Type: color, Object: chair, Color: unknown",
+            "claim_text_B": "Type: color, Object: chair, Color: unknown",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 3,
+            "claim_text_A": "remove, Object: potted plant",
+            "claim_text_B": "remove, Object: potted plant",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 4,
+            "claim_text_A": "remove, Object: wine glass",
+            "claim_text_B": "remove, Object: wine glass",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 5,
+            "claim_text_A": "remove, Object: cup",
+            "claim_text_B": "remove, Object: cup",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          }
+        ],
+        "summary": {
+          "is_logically_consistent": false,
+          "primary_issue": "Contradictory claims regarding the removal of objects"
+        }
+      }
+    },
+    {
+      "sample_id": "394206",
+      "ground_truth": {
+        "num_differences": 5,
+        "modifications": [
+          {
+            "bbox_h": 182.71,
+            "bbox_w": 186.84,
+            "bbox_x": 453.16,
+            "bbox_y": 290.92,
+            "category": "car",
+            "description": "The modified image shows five differences compared to the original. First, the car on the right side has changed color from gray to red. Second, the truck carrying the group of people has changed color from orange to blue. Third, a motorcycle visible in the original image has been removed. Fourth, one person seated near the center of the truck has been removed. Lastly, another person standing near the left side of the truck has also been removed.",
+            "type": "color"
+          },
+          {
+            "bbox_h": 311.09,
+            "bbox_w": 416.81,
+            "bbox_x": 53.47,
+            "bbox_y": 168.91,
+            "category": "truck",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 105.78,
+            "bbox_w": 57.8,
+            "bbox_x": 408.94,
+            "bbox_y": 350.6,
+            "category": "motorcycle",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 204.81,
+            "bbox_w": 100.15,
+            "bbox_x": 190.11,
+            "bbox_y": 214.98,
+            "category": "person",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 210.38,
+            "bbox_w": 103.24,
+            "bbox_x": 340.05,
+            "bbox_y": 199.13,
+            "category": "person",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "response_same": "No.",
+      "response_different": "No.\n\nThe two pictures appear to be identical in terms of content and composition. There are no visible differences between the two images provided.",
+      "consistency_evaluation": {
+        "overall_consistency_rate": 0.83,
+        "total_claims": 5,
+        "consistent_claims": 4,
+        "contradictory_claims": 1,
+        "ambiguous_claims": 0,
+        "claim_analysis": [
+          {
+            "claim_id": 1,
+            "claim_text_A": "The car color is different",
+            "claim_text_B": "Car color is unknown",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 2,
+            "claim_text_A": "The truck color is different",
+            "claim_text_B": "Truck color is unknown",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 3,
+            "claim_text_A": "A motorcycle is removed",
+            "claim_text_B": "Motorcycle is not present",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 4,
+            "claim_text_A": "A person is removed",
+            "claim_text_B": "Person is not present",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 5,
+            "claim_text_A": "Another person is removed",
+            "claim_text_B": "Another person is not present",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          }
+        ],
+        "summary": {
+          "is_logically_consistent": false,
+          "primary_issue": "Contradictory claim regarding car color"
+        }
+      }
+    },
+    {
+      "sample_id": "492110",
+      "ground_truth": {
+        "num_differences": 5,
+        "modifications": [
+          {
+            "bbox_h": 45.63,
+            "bbox_w": 94.04,
+            "bbox_x": 334.88,
+            "bbox_y": 360.79,
+            "category": "cell phone",
+            "description": "In the modified image, five differences can be observed. First, the cell phone on the table next to the laptop has been removed. Second, the white cup in the foreground has also been removed. Third, the chair in the background on the left has changed color from its original to red. Fourth, another chair in the background has changed color to blue. Lastly, a third chair in the background has changed color to lime green.",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 57.57,
+            "bbox_w": 110.35,
+            "bbox_x": 161.2,
+            "bbox_y": 368.2,
+            "category": "cup",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 113.42,
+            "bbox_w": 51.15,
+            "bbox_x": 0.0,
+            "bbox_y": 204.05,
+            "category": "chair",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 90.2,
+            "bbox_w": 64.29,
+            "bbox_x": 234.13,
+            "bbox_y": 189.03,
+            "category": "chair",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 154.87,
+            "bbox_w": 81.86,
+            "bbox_x": 507.75,
+            "bbox_y": 264.33,
+            "category": "chair",
+            "description": "",
+            "type": "color"
+          }
+        ]
+      },
+      "response_same": "Yes.",
+      "response_different": "No.",
+      "consistency_evaluation": {
+        "overall_consistency_rate": 0.83,
+        "total_claims": 5,
+        "consistent_claims": 4,
+        "contradictory_claims": 1,
+        "ambiguous_claims": 0,
+        "claim_analysis": [
+          {
+            "claim_id": 1,
+            "claim_text_A": "Cell phone is present in the first image but not in the second.",
+            "claim_text_B": "Cell phone is not mentioned.",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 2,
+            "claim_text_A": "Cup is present in the first image but not in the second.",
+            "claim_text_B": "Cup is not mentioned.",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 3,
+            "claim_text_A": "Chair color is different in the two images.",
+            "claim_text_B": "Chair color is not mentioned.",
+            "claim_type": "ambiguous",
+            "score_contribution": 0.5
+          },
+          {
+            "claim_id": 4,
+            "claim_text_A": "Chair color is different in the two images.",
+            "claim_text_B": "Chair color is not mentioned.",
+            "claim_type": "ambiguous",
+            "score_contribution": 0.5
+          },
+          {
+            "claim_id": 5,
+            "claim_text_A": "Chair color is different in the two images.",
+            "claim_text_B": "Chair color is not mentioned.",
+            "claim_type": "ambiguous",
+            "score_contribution": 0.5
+          }
+        ],
+        "summary": {
+          "is_logically_consistent": false,
+          "primary_issue": "Inconsistencies in object presence and color descriptions"
+        }
+      }
+    },
+    {
+      "sample_id": "203864",
+      "ground_truth": {
+        "num_differences": 4,
+        "modifications": [
+          {
+            "bbox_h": 9.89,
+            "bbox_w": 12.87,
+            "bbox_x": 112.34,
+            "bbox_y": 155.55,
+            "category": "sports ball",
+            "description": "Four differences are observed between the images. First, the sports ball held by the player in black on the left has been removed. Second, the tennis racket held by the same player in black has been removed. Third, the tennis racket held by the player in white in the foreground has been removed. Fourth, the person in white in the foreground has undergone a color change, with their entire body now appearing blue.",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 36.43,
+            "bbox_w": 37.06,
+            "bbox_x": 78.79,
+            "bbox_y": 162.93,
+            "category": "tennis racket",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 54.92,
+            "bbox_w": 84.58,
+            "bbox_x": 338.32,
+            "bbox_y": 272.52,
+            "category": "tennis racket",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 338.73,
+            "bbox_w": 180.95,
+            "bbox_x": 251.57,
+            "bbox_y": 100.41,
+            "category": "person",
+            "description": "",
+            "type": "color"
+          }
+        ]
+      },
+      "response_same": "No.",
+      "response_different": "Yes.",
+      "consistency_evaluation": {
+        "overall_consistency_rate": 0.83,
+        "total_claims": 4,
+        "consistent_claims": 3,
+        "contradictory_claims": 1,
+        "ambiguous_claims": 0,
+        "claim_analysis": [
+          {
+            "claim_id": 1,
+            "claim_text_A": "The sports ball is present in the first image.",
+            "claim_text_B": "The sports ball is missing in the second image.",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 2,
+            "claim_text_A": "The first image has a tennis racket.",
+            "claim_text_B": "The second image has a tennis racket.",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 3,
+            "claim_text_A": "The second image has a tennis racket removed.",
+            "claim_text_B": "The first image has a tennis racket.",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 4,
+            "claim_text_A": "The person in the first image has a different color.",
+            "claim_text_B": "The person in the second image has a different color.",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          }
+        ],
+        "summary": {
+          "is_logically_consistent": false,
+          "primary_issue": "Inconsistent claims about the presence of tennis rackets"
+        }
+      }
+    },
+    {
+      "sample_id": "197388",
+      "ground_truth": {
+        "num_differences": 4,
+        "modifications": [
+          {
+            "bbox_h": 241.57,
+            "bbox_w": 222.39,
+            "bbox_x": 139.41,
+            "bbox_y": 102.25,
+            "category": "person",
+            "description": "There are four differences between the images. First, the skier in blue in the center has changed to orange. Second, the skier in dark blue on the right has changed to magenta. Third, the skier in red and white on the far left has changed to lime green. Fourth, one skier in the background has been removed entirely.",
+            "type": "color"
+          },
+          {
+            "bbox_h": 217.19,
+            "bbox_w": 266.63,
+            "bbox_x": 372.58,
+            "bbox_y": 170.84,
+            "category": "person",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 223.36,
+            "bbox_w": 99.96,
+            "bbox_x": 540.04,
+            "bbox_y": 48.81,
+            "category": "person",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 165.61,
+            "bbox_w": 74.88,
+            "bbox_x": 287.17,
+            "bbox_y": 61.52,
+            "category": "person",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "response_same": "No.",
+      "response_different": "Yes.",
+      "consistency_evaluation": {
+        "overall_consistency_rate": 0.83,
+        "total_claims": 4,
+        "consistent_claims": 3,
+        "contradictory_claims": 1,
+        "ambiguous_claims": 0,
+        "claim_analysis": [
+          {
+            "claim_id": 1,
+            "claim_text_A": "Type: color, Object: person, Color: unknown",
+            "claim_text_B": "Type: color, Object: person, Color: unknown",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 2,
+            "claim_text_A": "Type: color, Object: person, Color: unknown",
+            "claim_text_B": "Type: color, Object: person, Color: unknown",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 3,
+            "claim_text_A": "Type: color, Object: person, Color: unknown",
+            "claim_text_B": "Type: color, Object: person, Color: unknown",
+            "claim_type": "consistent",
+            "score_contribution": 1.0
+          },
+          {
+            "claim_id": 4,
+            "claim_text_A": "Type: remove, Object: person",
+            "claim_text_B": "No corresponding claim",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          }
+        ],
+        "summary": {
+          "is_logically_consistent": false,
+          "primary_issue": "Missing claim correspondence for removal"
+        }
+      }
+    },
+    {
+      "sample_id": "19786",
+      "ground_truth": {
+        "num_differences": 3,
+        "modifications": [
+          {
+            "bbox_h": 259.18,
+            "bbox_w": 253.51,
+            "bbox_x": 71.27,
+            "bbox_y": 58.92,
+            "category": "couch",
+            "description": "\"There are three differences between the images. First, the couch in the background has changed color from brown to blue. Second, the laptop on the table in the upper right corner has been removed. Third, the remote control that was previously on the couch has been removed.\"",
+            "type": "color"
+          },
+          {
+            "bbox_h": 44.66,
+            "bbox_w": 39.61,
+            "bbox_x": 444.1,
+            "bbox_y": 86.8,
+            "category": "laptop",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 22.48,
+            "bbox_w": 14.99,
+            "bbox_x": 295.79,
+            "bbox_y": 345.38,
+            "category": "remote",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "response_same": "No.",
+      "response_different": "No.",
+      "consistency_evaluation": {
+        "overall_consistency_rate": 0.0,
+        "total_claims": 3,
+        "consistent_claims": 0,
+        "contradictory_claims": 3,
+        "ambiguous_claims": 0,
+        "claim_analysis": [
+          {
+            "claim_id": 1,
+            "claim_text_A": "Couch color is unknown",
+            "claim_text_B": "Couch color is different",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 2,
+            "claim_text_A": "Laptop is present",
+            "claim_text_B": "Laptop is removed",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          },
+          {
+            "claim_id": 3,
+            "claim_text_A": "Remote is present",
+            "claim_text_B": "Remote is removed",
+            "claim_type": "contradictory",
+            "score_contribution": -1.0
+          }
+        ],
+        "summary": {
+          "is_logically_consistent": false,
+          "primary_issue": "Contradictory claims about presence and color of objects"
+        }
+      }
+    }
+  ]
+}

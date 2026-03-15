@@ -1,0 +1,592 @@
+{
+  "model": "Qwen2.5-VL-7B-Instruct",
+  "responses": [
+    {
+      "sample_id": "15517",
+      "ground_truth": {
+        "num_differences": 3,
+        "modifications": [
+          {
+            "bbox_h": 84.49,
+            "bbox_w": 185.64,
+            "bbox_x": 162.58,
+            "bbox_y": 322.33,
+            "category": "bus",
+            "description": "\"There are three differences between the images. First, the green bus in the foreground has changed to blue. Second, one of the buses near the center of the bus terminal has been removed. Third, a bus in the middle of the terminal has shifted slightly to the right.\"",
+            "type": "color"
+          },
+          {
+            "bbox_h": 22.56,
+            "bbox_w": 90.98,
+            "bbox_x": 145.82,
+            "bbox_y": 274.98,
+            "category": "bus",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 29.36,
+            "bbox_w": 82.66,
+            "bbox_x": 433.22,
+            "bbox_y": 283.28,
+            "category": "bus",
+            "description": "",
+            "type": "position"
+          }
+        ]
+      },
+      "raw_response": "{\n  \"predicted_num\": 2,\n  \"structured_output\": [\n    {\"type\": \"color\", \"category\": \"bus\"},\n    {\"type\": \"remove\", \"category\": \"person\"}\n  ]\n}",
+      "parsed_response": {
+        "has_structured_output": true,
+        "predicted_num": 2,
+        "structured_output": [
+          {
+            "type": "color",
+            "category": "bus"
+          },
+          {
+            "type": "remove",
+            "category": "person"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "529148",
+      "ground_truth": {
+        "num_differences": 5,
+        "modifications": [
+          {
+            "bbox_h": 42.31,
+            "bbox_w": 62.5,
+            "bbox_x": 252.91,
+            "bbox_y": 329.6,
+            "category": "mouse",
+            "description": "\"There are five differences between the images. First, the computer mouse on the left has changed color from gray to cyan. Second and third, two books from the shelf in the background have been removed. Fourth, the laptop on the right side of the desk has been removed entirely. Fifth, the laptop in the center has changed color from its original silver to purple.\"",
+            "type": "color"
+          },
+          {
+            "bbox_h": 22.69,
+            "bbox_w": 35.72,
+            "bbox_x": 270.51,
+            "bbox_y": 116.9,
+            "category": "book",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 41.52,
+            "bbox_w": 49.93,
+            "bbox_x": 256.99,
+            "bbox_y": 154.64,
+            "category": "book",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 174.32,
+            "bbox_w": 174.29,
+            "bbox_x": 376.04,
+            "bbox_y": 53.61,
+            "category": "laptop",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 200.08,
+            "bbox_w": 206.78,
+            "bbox_x": 294.85,
+            "bbox_y": 220.18,
+            "category": "laptop",
+            "description": "",
+            "type": "color"
+          }
+        ]
+      },
+      "raw_response": "{\n  \"predicted_num\": 2,\n  \"structured_output\": [\n    {\"type\": \"color\", \"category\": \"laptop\"},\n    {\"type\": \"remove\", \"category\": \"mouse\"}\n  ]\n}",
+      "parsed_response": {
+        "has_structured_output": true,
+        "predicted_num": 2,
+        "structured_output": [
+          {
+            "type": "color",
+            "category": "laptop"
+          },
+          {
+            "type": "remove",
+            "category": "mouse"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "161609",
+      "ground_truth": {
+        "num_differences": 4,
+        "modifications": [
+          {
+            "bbox_h": 78.23,
+            "bbox_w": 130.38,
+            "bbox_x": 245.31,
+            "bbox_y": 270.15,
+            "category": "dog",
+            "description": "There are four differences between the images. First, the dog inside the backpack has been removed entirely. Second, the backpack's color has changed from gray to lime green. Third, one person ascending the stairs on the left side has been removed. Fourth, another person ascending the stairs farther up has also been removed.",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 271.82,
+            "bbox_w": 362.43,
+            "bbox_x": 72.27,
+            "bbox_y": 201.71,
+            "category": "backpack",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 152.26,
+            "bbox_w": 60.03,
+            "bbox_x": 109.43,
+            "bbox_y": 188.55,
+            "category": "person",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 134.74,
+            "bbox_w": 49.35,
+            "bbox_x": 158.32,
+            "bbox_y": 211.55,
+            "category": "person",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "raw_response": "{\n  \"predicted_num\": 2,\n  \"structured_output\": [\n    {\"type\": \"color\", \"category\": \"dog\"},\n    {\"type\": \"remove\", \"category\": \"dog\"}\n  ]\n}",
+      "parsed_response": {
+        "has_structured_output": true,
+        "predicted_num": 2,
+        "structured_output": [
+          {
+            "type": "color",
+            "category": "dog"
+          },
+          {
+            "type": "remove",
+            "category": "dog"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "22705",
+      "ground_truth": {
+        "num_differences": 3,
+        "modifications": [
+          {
+            "bbox_h": 65.6,
+            "bbox_w": 24.1,
+            "bbox_x": 81.67,
+            "bbox_y": 212.76,
+            "category": "bottle",
+            "description": "\"There are three differences between the images. First, the bottle on the counter to the left of the refrigerator has been removed. Second, the wine glass next to the bottle has disappeared. Third, the bowl on the counter near the backsplash has been removed.\"",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 82.36,
+            "bbox_w": 25.14,
+            "bbox_x": 179.41,
+            "bbox_y": 210.82,
+            "category": "wine glass",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 23.95,
+            "bbox_w": 31.58,
+            "bbox_x": 23.29,
+            "bbox_y": 256.96,
+            "category": "bowl",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "raw_response": "{\n  \"predicted_num\": 1,\n  \"structured_output\": [\n    {\"type\": \"remove\", \"category\": \"bottle\"}\n  ]\n}",
+      "parsed_response": {
+        "has_structured_output": true,
+        "predicted_num": 1,
+        "structured_output": [
+          {
+            "type": "remove",
+            "category": "bottle"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "572678",
+      "ground_truth": {
+        "num_differences": 5,
+        "modifications": [
+          {
+            "bbox_h": 75.44,
+            "bbox_w": 145.16,
+            "bbox_x": 182.42,
+            "bbox_y": 344.78,
+            "category": "chair",
+            "description": "There are five differences between the images. First, the chair on the right side of the dining table has changed color from its original shade to blue. Second, the chair on the left side of the living room has changed color from its original shade to magenta. Third, the potted plant near the balcony has been removed. Fourth, the wine glass on the bar table has disappeared. Lastly, the cup on the dining table has been removed.",
+            "type": "color"
+          },
+          {
+            "bbox_h": 98.31,
+            "bbox_w": 122.45,
+            "bbox_x": 162.06,
+            "bbox_y": 229.58,
+            "category": "chair",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 148.62,
+            "bbox_w": 81.32,
+            "bbox_x": 395.18,
+            "bbox_y": 158.26,
+            "category": "potted plant",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 86.3,
+            "bbox_w": 40.9,
+            "bbox_x": 394.58,
+            "bbox_y": 279.66,
+            "category": "wine glass",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 21.99,
+            "bbox_w": 20.25,
+            "bbox_x": 20.64,
+            "bbox_y": 191.63,
+            "category": "cup",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "raw_response": "{\n  \"predicted_num\": 1,\n  \"structured_output\": [\n    {\"type\": \"color\", \"category\": \"cushion\"}\n  ]\n}",
+      "parsed_response": {
+        "has_structured_output": true,
+        "predicted_num": 1,
+        "structured_output": [
+          {
+            "type": "color",
+            "category": "cushion"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "394206",
+      "ground_truth": {
+        "num_differences": 5,
+        "modifications": [
+          {
+            "bbox_h": 182.71,
+            "bbox_w": 186.84,
+            "bbox_x": 453.16,
+            "bbox_y": 290.92,
+            "category": "car",
+            "description": "The modified image shows five differences compared to the original. First, the car on the right side has changed color from gray to red. Second, the truck carrying the group of people has changed color from orange to blue. Third, a motorcycle visible in the original image has been removed. Fourth, one person seated near the center of the truck has been removed. Lastly, another person standing near the left side of the truck has also been removed.",
+            "type": "color"
+          },
+          {
+            "bbox_h": 311.09,
+            "bbox_w": 416.81,
+            "bbox_x": 53.47,
+            "bbox_y": 168.91,
+            "category": "truck",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 105.78,
+            "bbox_w": 57.8,
+            "bbox_x": 408.94,
+            "bbox_y": 350.6,
+            "category": "motorcycle",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 204.81,
+            "bbox_w": 100.15,
+            "bbox_x": 190.11,
+            "bbox_y": 214.98,
+            "category": "person",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 210.38,
+            "bbox_w": 103.24,
+            "bbox_x": 340.05,
+            "bbox_y": 199.13,
+            "category": "person",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "raw_response": "{\n  \"predicted_num\": 2,\n  \"structured_output\": [\n    {\"type\": \"color\", \"category\": \"truck\"},\n    {\"type\": \"remove\", \"category\": \"jeep\"}\n  ]\n}",
+      "parsed_response": {
+        "has_structured_output": true,
+        "predicted_num": 2,
+        "structured_output": [
+          {
+            "type": "color",
+            "category": "truck"
+          },
+          {
+            "type": "remove",
+            "category": "jeep"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "492110",
+      "ground_truth": {
+        "num_differences": 5,
+        "modifications": [
+          {
+            "bbox_h": 45.63,
+            "bbox_w": 94.04,
+            "bbox_x": 334.88,
+            "bbox_y": 360.79,
+            "category": "cell phone",
+            "description": "In the modified image, five differences can be observed. First, the cell phone on the table next to the laptop has been removed. Second, the white cup in the foreground has also been removed. Third, the chair in the background on the left has changed color from its original to red. Fourth, another chair in the background has changed color to blue. Lastly, a third chair in the background has changed color to lime green.",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 57.57,
+            "bbox_w": 110.35,
+            "bbox_x": 161.2,
+            "bbox_y": 368.2,
+            "category": "cup",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 113.42,
+            "bbox_w": 51.15,
+            "bbox_x": 0.0,
+            "bbox_y": 204.05,
+            "category": "chair",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 90.2,
+            "bbox_w": 64.29,
+            "bbox_x": 234.13,
+            "bbox_y": 189.03,
+            "category": "chair",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 154.87,
+            "bbox_w": 81.86,
+            "bbox_x": 507.75,
+            "bbox_y": 264.33,
+            "category": "chair",
+            "description": "",
+            "type": "color"
+          }
+        ]
+      },
+      "raw_response": "{\n  \"predicted_num\": 1,\n  \"structured_output\": [\n    {\"type\": \"color\", \"category\": \"jacket\"}\n  ]\n}",
+      "parsed_response": {
+        "has_structured_output": true,
+        "predicted_num": 1,
+        "structured_output": [
+          {
+            "type": "color",
+            "category": "jacket"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "203864",
+      "ground_truth": {
+        "num_differences": 4,
+        "modifications": [
+          {
+            "bbox_h": 9.89,
+            "bbox_w": 12.87,
+            "bbox_x": 112.34,
+            "bbox_y": 155.55,
+            "category": "sports ball",
+            "description": "Four differences are observed between the images. First, the sports ball held by the player in black on the left has been removed. Second, the tennis racket held by the same player in black has been removed. Third, the tennis racket held by the player in white in the foreground has been removed. Fourth, the person in white in the foreground has undergone a color change, with their entire body now appearing blue.",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 36.43,
+            "bbox_w": 37.06,
+            "bbox_x": 78.79,
+            "bbox_y": 162.93,
+            "category": "tennis racket",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 54.92,
+            "bbox_w": 84.58,
+            "bbox_x": 338.32,
+            "bbox_y": 272.52,
+            "category": "tennis racket",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 338.73,
+            "bbox_w": 180.95,
+            "bbox_x": 251.57,
+            "bbox_y": 100.41,
+            "category": "person",
+            "description": "",
+            "type": "color"
+          }
+        ]
+      },
+      "raw_response": "{\n  \"predicted_num\": 2,\n  \"structured_output\": [\n    {\"type\": \"color\", \"category\": \"man\"},\n    {\"type\": \"remove\", \"category\": \"tennis ball\"}\n  ]\n}",
+      "parsed_response": {
+        "has_structured_output": true,
+        "predicted_num": 2,
+        "structured_output": [
+          {
+            "type": "color",
+            "category": "man"
+          },
+          {
+            "type": "remove",
+            "category": "tennis ball"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "197388",
+      "ground_truth": {
+        "num_differences": 4,
+        "modifications": [
+          {
+            "bbox_h": 241.57,
+            "bbox_w": 222.39,
+            "bbox_x": 139.41,
+            "bbox_y": 102.25,
+            "category": "person",
+            "description": "There are four differences between the images. First, the skier in blue in the center has changed to orange. Second, the skier in dark blue on the right has changed to magenta. Third, the skier in red and white on the far left has changed to lime green. Fourth, one skier in the background has been removed entirely.",
+            "type": "color"
+          },
+          {
+            "bbox_h": 217.19,
+            "bbox_w": 266.63,
+            "bbox_x": 372.58,
+            "bbox_y": 170.84,
+            "category": "person",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 223.36,
+            "bbox_w": 99.96,
+            "bbox_x": 540.04,
+            "bbox_y": 48.81,
+            "category": "person",
+            "description": "",
+            "type": "color"
+          },
+          {
+            "bbox_h": 165.61,
+            "bbox_w": 74.88,
+            "bbox_x": 287.17,
+            "bbox_y": 61.52,
+            "category": "person",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "raw_response": "{\n  \"predicted_num\": 3,\n  \"structured_output\": [\n    {\"type\": \"color\", \"category\": \"skier\"},\n    {\"type\": \"remove\", \"category\": \"skier\"},\n    {\"type\": \"position\", \"category\": \"skier\"}\n  ]\n}",
+      "parsed_response": {
+        "has_structured_output": true,
+        "predicted_num": 3,
+        "structured_output": [
+          {
+            "type": "color",
+            "category": "skier"
+          },
+          {
+            "type": "remove",
+            "category": "skier"
+          },
+          {
+            "type": "position",
+            "category": "skier"
+          }
+        ]
+      }
+    },
+    {
+      "sample_id": "19786",
+      "ground_truth": {
+        "num_differences": 3,
+        "modifications": [
+          {
+            "bbox_h": 259.18,
+            "bbox_w": 253.51,
+            "bbox_x": 71.27,
+            "bbox_y": 58.92,
+            "category": "couch",
+            "description": "\"There are three differences between the images. First, the couch in the background has changed color from brown to blue. Second, the laptop on the table in the upper right corner has been removed. Third, the remote control that was previously on the couch has been removed.\"",
+            "type": "color"
+          },
+          {
+            "bbox_h": 44.66,
+            "bbox_w": 39.61,
+            "bbox_x": 444.1,
+            "bbox_y": 86.8,
+            "category": "laptop",
+            "description": "",
+            "type": "remove"
+          },
+          {
+            "bbox_h": 22.48,
+            "bbox_w": 14.99,
+            "bbox_x": 295.79,
+            "bbox_y": 345.38,
+            "category": "remote",
+            "description": "",
+            "type": "remove"
+          }
+        ]
+      },
+      "raw_response": "{\n  \"predicted_num\": 1,\n  \"structured_output\": [\n    {\"type\": \"color\", \"category\": \"couch\"}\n  ]\n}",
+      "parsed_response": {
+        "has_structured_output": true,
+        "predicted_num": 1,
+        "structured_output": [
+          {
+            "type": "color",
+            "category": "couch"
+          }
+        ]
+      }
+    }
+  ]
+}

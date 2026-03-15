@@ -1,0 +1,20 @@
+{
+  "image_id": 872,
+  "file_name": "000000000872.jpg",
+  "num_annotations": 4,
+  "difference": {
+    "type": "remove",
+    "bbox": [
+      368.64,
+      157.25,
+      57.45,
+      45.78
+    ],
+    "category": "baseball glove",
+    "category_id": 40,
+    "area": 1332.6575999999995,
+    "selection_reason": "This object is a non-salient foreground item. Its removal is physically plausible without breaking the scene's core integrity; the player would simply be holding an empty hand. While smaller than the median area, it is clearly visible and not tiny or inconspicuous like the sports ball.",
+    "object_index": 3
+  },
+  "mode": "planner_plus_inpaint"
+}
