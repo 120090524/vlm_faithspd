@@ -1,0 +1,21 @@
+
+.env
+
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+data/raw/
+
+
+outputs/
+work/
+
+
+*.bak
+*.bak_*
+
+# 忽略本地生成的各种图表 (如果不打算把生成的图共享上去，取消注释下面这行)
+# fig/

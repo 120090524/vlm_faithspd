@@ -4,12 +4,12 @@ Utility functions for model loading and common operations.
 """
 
 import torch
-from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
+from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
 
 
-def load_qwen2_vl_model(model_path="Qwen/Qwen2-VL-7B-Instruct", dtype=torch.bfloat16, device_map="auto"):
+def load_qwen2_vl_model(model_path="Qwen/Qwen2.5-VL-7B-Instruct", dtype=torch.bfloat16, device_map="auto"):
     """Load Qwen2-VL model with specified parameters."""
-    model = Qwen2VLForConditionalGeneration.from_pretrained(
+    model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
         model_path,
         torch_dtype=dtype,
         device_map=device_map
