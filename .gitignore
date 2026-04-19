@@ -15,8 +15,9 @@ outputs/*
 !outputs/consistency/
 !outputs/faithfulness/
 !outputs/metrics/
-!outputs/remove_debug/
+
 !outputs/attention_ratio/
+
 work/
 
 

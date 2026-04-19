@@ -84,7 +84,10 @@ def main() -> None:
         sample_id = str(row["sample_id"])
         if sample_id not in labels:
             continue
-        score = float(row["summary"][args.ratio_key])
+        if "summary" in row:
+            score = float(row["summary"][args.ratio_key])
+        else:
+            score = float(row[args.ratio_key])
         if not np.isfinite(score):
             continue
         y = int(labels[sample_id])
