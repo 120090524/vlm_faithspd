@@ -18,12 +18,15 @@ _gpu_info_printed = False
 
 class SpotDifferenceGenerator:
     
-    def __init__(self, coco_ann_file, coco_img_dir):
+    def __init__(self, coco_ann_file, coco_img_dir, inpaint_backend="lama", inpaint_backend_kwargs=None):
         self.coco = COCO(coco_ann_file)
         self.coco_img_dir = Path(coco_img_dir)
         self.client = client
         self.group_counter = 0
         self.lama_model = None
+        self.inpaint_backend_name = inpaint_backend
+        self.inpaint_backend_kwargs = inpaint_backend_kwargs or {}
+        self.inpainter = None
     
     def _init_lama_model(self):
         global _gpu_info_printed
@@ -68,6 +71,21 @@ class SpotDifferenceGenerator:
                     _gpu_info_printed = True
                 self.lama_model = SimpleLama()
     
+
+    def _init_inpainter(self):
+        if self.inpainter is None:
+            self.inpainter = build_inpainter(self.inpaint_backend_name, **self.inpaint_backend_kwargs)
+
+    def _run_inpaint(self, img_bgr, mask_u8, prompt="", negative_prompt="", seed=0):
+        self._init_inpainter()
+        return self.inpainter(
+            img_bgr,
+            mask_u8,
+            prompt=prompt,
+            negative_prompt=negative_prompt,
+            seed=seed,
+    )
+
     def _pad_to_multiple_of_8(self, img):
         """
         将图像填充到8的倍数，这是 LaMa 模型的最佳实践
@@ -376,7 +394,7 @@ IMPORTANT: Return ONLY a valid JSON object (no markdown code blocks, no extra te
         return "ok"
 
     # Method 1:remove object
-    def _remove_object(self, image_id, excluded_indices=None):
+    def _remove_object(self, image_id, excluded_indices=None, force_object_index=None, seed=0):
         """
         移除对象
         
