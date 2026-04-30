@@ -20,7 +20,7 @@ outputs/*
 
 work/
 
-
+README.md
 *.bak
 *.bak_*
 
