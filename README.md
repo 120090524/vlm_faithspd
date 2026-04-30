@@ -1,4 +1,4 @@
-# SPD-Faith / CSE559: Spot-the-Difference Faithfulness Benchmark
+# CSE559: Spot-the-Difference Faithfulness Benchmark
 
 This repository is the CSE559 project workspace for studying **faithfulness in vision-language models (VLMs)** on spot-the-difference tasks. The project combines three directions:
 
@@ -166,7 +166,7 @@ export SSL_CERT_FILE="$(python -c 'import certifi; print(certifi.where())')"
 
 There are two ways to obtain data.
 
-### 4.1 Export the released SPD-Faith-Bench dataset
+### 4.1 Export the released dataset
 
 The easiest way to reproduce benchmark experiments is to export samples from Hugging Face:
 
