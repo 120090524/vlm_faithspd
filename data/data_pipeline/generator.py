@@ -179,20 +179,162 @@ class SpotDifferenceGenerator:
         )
 
     @staticmethod
-    def _remove_prompt(category_name: str) -> str:
+    def _mask_area_ratio(mask: np.ndarray, img_shape: Tuple[int, ...]) -> float:
+        """Return mask area / image area. White/255 means repaint."""
+        if mask.ndim == 3:
+            mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
+        h, w = img_shape[:2]
+        return float(np.count_nonzero(mask > 127)) / max(float(h * w), 1.0)
+
+    @staticmethod
+    def _recommended_remove_dilation(mask: np.ndarray, img_shape: Tuple[int, ...]) -> int:
+        """Choose a dilation radius for object-removal masks.
+
+        COCO instance masks are usually tight. For object removal, especially
+        with SD/SDXL, tight masks leave object pixels outside the repaint region
+        and encourage the model to regenerate the object. Large masks get a
+        bigger radius because fur/limbs/boundary pixels are more likely to leak.
+        """
+        ratio = SpotDifferenceGenerator._mask_area_ratio(mask, img_shape)
+        h, w = img_shape[:2]
+        short_side = max(1, min(h, w))
+        if ratio >= 0.25:
+            frac = 0.055
+        elif ratio >= 0.12:
+            frac = 0.045
+        elif ratio >= 0.05:
+            frac = 0.035
+        else:
+            frac = 0.025
+        return int(np.clip(round(short_side * frac), 8, 36))
+
+    @staticmethod
+    def _prepare_remove_mask(
+        mask: np.ndarray,
+        img_shape: Tuple[int, ...],
+        dilation_px: Optional[int] = None,
+        close_px: int = 5,
+    ) -> np.ndarray:
+        """Prepare a robust binary mask for removal-to-background.
+
+        255 means repaint / inpaint. We close small holes and dilate the mask so
+        object boundary remnants do not cue diffusion models to generate the
+        object again.
+        """
+        if mask.ndim == 3:
+            mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
+        mask = mask.astype(np.uint8)
+        _, mask = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY)
+
+        if close_px and close_px > 0:
+            k = int(close_px) * 2 + 1
+            kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k))
+            mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel, iterations=1)
+
+        if dilation_px is None:
+            dilation_px = SpotDifferenceGenerator._recommended_remove_dilation(mask, img_shape)
+
+        if dilation_px and dilation_px > 0:
+            k = int(dilation_px) * 2 + 1
+            kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k))
+            mask = cv2.dilate(mask, kernel, iterations=1)
+
+        _, mask = cv2.threshold(mask, 127, 255, cv2.THRESH_BINARY)
+        return mask.astype(np.uint8)
+
+    @staticmethod
+    def _infer_background_prompt_from_context(img_bgr: np.ndarray, mask_u8: np.ndarray) -> str:
+        """Infer a coarse background target from pixels around the mask.
+
+        The returned text describes only background, never the removed object.
+        """
+        try:
+            if mask_u8.ndim == 3:
+                mask_u8 = cv2.cvtColor(mask_u8, cv2.COLOR_BGR2GRAY)
+            mask_u8 = (mask_u8 > 127).astype(np.uint8) * 255
+            h, w = img_bgr.shape[:2]
+
+            ring_px = int(np.clip(round(min(h, w) * 0.06), 12, 48))
+            k = ring_px * 2 + 1
+            kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k))
+            dilated = cv2.dilate(mask_u8, kernel, iterations=1)
+            ring = (dilated > 127) & ~(mask_u8 > 127)
+
+            if np.count_nonzero(ring) < 128:
+                ring = ~(mask_u8 > 127)
+            if np.count_nonzero(ring) < 128:
+                return "the same empty background texture visible around the masked region"
+
+            hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
+            hs = hsv[ring]
+            if hs.size == 0:
+                return "the same empty background texture visible around the masked region"
+
+            if hs.shape[0] > 30000:
+                hs = hs[:: max(1, hs.shape[0] // 30000)]
+
+            hue = hs[:, 0].astype(np.float32)
+            sat = hs[:, 1].astype(np.float32)
+            val = hs[:, 2].astype(np.float32)
+            vivid = sat > 45
+
+            green_ratio = float(np.mean((hue >= 35) & (hue <= 95) & vivid & (val > 35)))
+            blue_ratio = float(np.mean((hue >= 90) & (hue <= 135) & (sat > 35) & (val > 55)))
+            gray_ratio = float(np.mean(sat < 45))
+            brown_ratio = float(np.mean((hue >= 5) & (hue <= 35) & (sat > 30)))
+            dark_ratio = float(np.mean(val < 65))
+
+            if green_ratio > 0.30:
+                return "continuous grass, leaves, vegetation, and natural green ground matching the surroundings"
+            if blue_ratio > 0.30:
+                return "continuous blue sky, water, or distant blue background matching the surroundings"
+            if gray_ratio > 0.45 and dark_ratio < 0.65:
+                return "continuous plain wall, pavement, road, floor, or neutral surface matching the surroundings"
+            if brown_ratio > 0.30:
+                return "continuous dirt, soil, wood, dry grass, or earth-toned ground matching the surroundings"
+            return "the same empty background texture, colors, lighting, and perspective visible around the mask"
+        except Exception:
+            return "the same empty background texture visible around the masked region"
+
+    @staticmethod
+    def _remove_prompt(category_name: str = "", background_hint: str = "") -> str:
+        """Positive prompt for object removal.
+
+        The prompt describes what should appear inside the mask: background only.
+        It deliberately does NOT mention the removed category name; putting the
+        category in the positive prompt can make SD/SDXL recreate the object.
+        """
+        if not background_hint:
+            background_hint = "the same empty background texture visible around the masked region"
         return (
-            f"Remove the {category_name} and fill the masked area with a clean, "
-            f"natural, realistic background consistent with the surrounding scene. "
-            f"Do not add new objects."
+            "photorealistic empty background only, no foreground subject, no object, "
+            "continue the existing scene behind the mask, "
+            f"{background_hint}, seamless texture continuation, consistent lighting, "
+            "shadows, camera perspective, color, and image quality"
         )
 
     @staticmethod
-    def _remove_negative_prompt(category_name: str) -> str:
-        return (
-            f"{category_name}, duplicate object, extra object, extra animal, extra person, "
-            f"artifact, blurry, distorted, warped texture, unnatural edge, color shift, "
-            f"inconsistent lighting"
-        )
+    def _remove_negative_prompt(category_name: str = "") -> str:
+        category_name = str(category_name or "").strip()
+        banned = [
+            category_name,
+            "foreground subject", "new object", "duplicate object", "extra object", "object silhouette",
+            "animal", "bear", "dog", "cat", "horse", "cow", "sheep", "bird", "elephant", "zebra", "giraffe",
+            "person", "human", "man", "woman", "child",
+            "face", "eyes", "nose", "mouth", "ears", "head", "body", "fur", "hair", "skin",
+            "paw", "leg", "arm", "hand", "tail", "toy", "statue", "mask", "logo", "text",
+            "artifact", "blurry", "distorted", "warped texture", "unnatural edge", "hard seam",
+            "color shift", "inconsistent lighting", "cartoon", "painting", "low quality",
+        ]
+        seen = set()
+        cleaned = []
+        for item in banned:
+            item = str(item).strip()
+            key = item.lower()
+            if item and key not in seen:
+                seen.add(key)
+                cleaned.append(item)
+        return ", ".join(cleaned)
 
     # ---------------------------------------------------------------------
     # Image / mask utilities
@@ -566,6 +708,40 @@ IMPORTANT: Return ONLY a valid JSON object in this exact format:
         return objects_info
 
     @staticmethod
+    def _filter_clean_removal_candidates(
+        img: np.ndarray,
+        available_indices: Sequence[int],
+        available_anns: Sequence[Dict[str, Any]],
+        min_area_ratio: float = 0.002,
+        max_area_ratio: float = 0.18,
+    ) -> Tuple[List[int], List[Dict[str, Any]], str]:
+        """Prefer objects that can be removed into background cleanly.
+
+        Very large main subjects require hallucinating most of the hidden scene
+        behind them.  For benchmark generation, small/medium foreground objects
+        are cleaner.  If no object fits the range, fall back to all available
+        objects so the script still runs.
+        """
+        img_area = float(img.shape[0] * img.shape[1])
+        clean_indices: List[int] = []
+        clean_anns: List[Dict[str, Any]] = []
+        for idx, ann in zip(available_indices, available_anns):
+            area_ratio = float(ann.get("area", 0.0)) / max(img_area, 1.0)
+            if ann.get("iscrowd", 0):
+                continue
+            if min_area_ratio <= area_ratio <= max_area_ratio:
+                clean_indices.append(int(idx))
+                clean_anns.append(ann)
+
+        if clean_anns:
+            return clean_indices, clean_anns, (
+                f"clean-removal candidates only: {min_area_ratio:.3f} <= area_ratio <= {max_area_ratio:.3f}"
+            )
+        return list(map(int, available_indices)), list(available_anns), (
+            "no clean small/medium removal candidate found; fallback to all available annotations"
+        )
+
+    @staticmethod
     def _select_median_area_annotation(available_indices, available_anns):
         areas = [float(ann.get("area", 0.0)) for ann in available_anns]
         median_area = float(np.median(areas)) if areas else 0.0
@@ -617,37 +793,43 @@ IMPORTANT: Return ONLY a valid JSON object in this exact format:
             if not available_anns:
                 raise ValueError(f"图像 {image_id} 没有可用的未处理对象（所有对象都已被处理）")
 
-            objects_info = self._objects_info_for_anns(img, available_anns, include_area=True)
+            candidate_indices, candidate_anns, candidate_filter_reason = self._filter_clean_removal_candidates(
+                img, available_indices, available_anns
+            )
+
+            objects_info = self._objects_info_for_anns(img, candidate_anns, include_area=True)
             llm_choice = self._ask_llm_remove_object(img, objects_info)
 
             if llm_choice is not None:
                 try:
                     idx = int(llm_choice.get("selected_object_id"))
-                    if 0 <= idx < len(available_anns):
-                        selected_original_idx = int(available_indices[idx])
+                    if 0 <= idx < len(candidate_anns):
+                        selected_original_idx = int(candidate_indices[idx])
                         selected_ann = anns[selected_original_idx]
-                        selection_reason = llm_choice.get("reason")
+                        selection_reason = f"{llm_choice.get('reason', 'LLM selection')} | {candidate_filter_reason}"
                 except Exception:
                     selected_ann = None
 
             if selected_ann is None:
                 selected_original_idx, selected_ann = self._select_median_area_annotation(
-                    available_indices, available_anns
+                    candidate_indices, candidate_anns
                 )
-                selection_reason = "fallback: median-area selection"
+                selection_reason = f"fallback: median-area selection | {candidate_filter_reason}"
 
         cat_info = self.coco.loadCats(selected_ann["category_id"])[0]
         category_name = cat_info["name"]
 
-        # Create and smooth mask. 255 means repaint/inpaint.
-        mask = create_mask_from_segmentation(img.shape, selected_ann["segmentation"])
-        mask = self._smooth_mask_edges(mask, kernel_size=3)
+        # Create a robust removal mask. 255 means repaint/inpaint.
+        raw_mask = create_mask_from_segmentation(img.shape, selected_ann["segmentation"])
+        mask = self._prepare_remove_mask(raw_mask, img.shape)
+        background_hint = self._infer_background_prompt_from_context(img, mask)
 
-        # This is the key fix: use the selected backend instead of hard-coded LaMa.
+        # Use the selected backend. The positive prompt describes BACKGROUND only;
+        # the removed category is used only in the negative prompt.
         result_bgr = self._run_inpaint(
             img,
             mask,
-            prompt=self._remove_prompt(category_name),
+            prompt=self._remove_prompt(category_name, background_hint),
             negative_prompt=self._remove_negative_prompt(category_name),
             seed=seed,
         )
@@ -658,6 +840,10 @@ IMPORTANT: Return ONLY a valid JSON object in this exact format:
             "category": category_name,
             "category_id": int(selected_ann["category_id"]),
             "area": float(selected_ann.get("area", 0.0)),
+            "area_ratio": float(selected_ann.get("area", 0.0)) / max(float(img.shape[0] * img.shape[1]), 1.0),
+            "raw_mask_area_ratio": self._mask_area_ratio(raw_mask, img.shape),
+            "expanded_mask_area_ratio": self._mask_area_ratio(mask, img.shape),
+            "background_hint": background_hint,
             "selection_reason": selection_reason,
             "object_index": int(selected_original_idx),
             "inpaint_backend": self.inpaint_backend_name,
@@ -797,11 +983,12 @@ IMPORTANT: Return ONLY a valid JSON object in this exact format:
                 raise ValueError("object_mask 中没有非零像素，无法进行物体移动")
 
             # 1) Remove object from original position via selected backend.
-            mask_smooth = self._smooth_mask_edges(mask, kernel_size=3)
+            mask_smooth = self._prepare_remove_mask(mask, img.shape)
+            background_hint = self._infer_background_prompt_from_context(img, mask_smooth)
             img_removed = self._run_inpaint(
                 img,
                 mask_smooth,
-                prompt=self._remove_prompt(category_name),
+                prompt=self._remove_prompt(category_name, background_hint),
                 negative_prompt=self._remove_negative_prompt(category_name),
                 seed=seed,
             )
